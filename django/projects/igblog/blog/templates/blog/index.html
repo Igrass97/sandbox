@@ -1,0 +1,20 @@
+<!-- To make the tutorial shorter, all template examples use incomplete HTML. In your own projects you should use complete HTML documents. -->
+{% load static %}
+<link rel="stylesheet" href="{% static 'blog/style.css' %}">
+
+<h1>Latest Posts</h1>
+
+{% if post_list %}
+    <div class="post-list">
+        {% for post in post_list %}
+            <div class="post-card">
+                <a class="post-card__link" href="{% url 'blog:post_detail' post.id %}">{{post.post_title}}</a>
+                <p class="post-card__text">{{post.post_text}}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No Posts Here Yet.</p>
+{% endif %}
+
+<a class="link" style="display: block; margin-top: 3rem;" href="{% url 'blog:post_form' %}">Create New Post</a>
